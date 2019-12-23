@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}请确认你的邮箱 - Soup{% endblock %}
+{% block body %}
+<div class="container">
+	<div class="row soup-set-min-height soup-add-margin-top">
+		<div class="col s12">
+			<h4>Hi, {{ user.username}}</h4>
+			<p>你的邮箱还没有通过验证, 快去你的邮箱查看确认邮件吧!</p>
+			<p>如果链接已经失效, 请点击<a href="javascript:void(0);" 
+				data-user="{{ user.username }}" data-type="confirmation" 
+				data-url="{% url 'unconfirmed' %}"
+				onclick="send_mail(event);">这里</a>重新发送确认邮件.</p>
+		</div>
+	</div>
+</div>
+{% endblock %}

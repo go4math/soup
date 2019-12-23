@@ -1,0 +1,8 @@
+__pycache__
+db.sqlite3
+venv
+templates.old
+fake.py
+*.sh
+*/migrations
+main/static

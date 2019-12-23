@@ -1,0 +1,24 @@
+
+			{# arrange pagination #}
+			<ul class="pagination soup-fix-bottom soup-fix-center">
+				{% if items.has_previous %}
+				<li class="waves-effect"><a href="?{{ query_string_prefix }}page={{ items.previous_page_number }}">
+						<i class="material-icons">chevron_left</i></a></li>
+				{% else %}
+			<li class="disabled"><a href="#"><i class="material-icons">chevron_left</i></a></li>
+			{% endif %}
+				{% for i in page_of_paginator %}
+				 {% if i == items.number %}
+				 <li class="active"><a href="?{{ query_string_prefix }}page={{ i }}">{{ i }}</a></li>
+			{% else %}
+			<li class="waves-effect"><a href="?{{ query_string_prefix }}page={{ i }}">{{ i }}</a></li>
+			{% endif %}
+			{% endfor %}
+			{% if items.has_next %}
+			<li class="waves-effect"><a href="?{{ query_string_prefix }}page={{ items.next_page_number }}">
+					<i class="material-icons">chevron_right</i></a></li>
+			{% else %}
+			<li class="disabled"><a href="#"><i class="material-icons">chevron_right</i></a></li>
+			{% endif %}
+			</ul>
+			{# end arrangement of pagination #}

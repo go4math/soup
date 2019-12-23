@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}登录 - Soup{% endblock %}
+{% block body %}
+
+<div class="container">
+	<div class="row soup-set-min-height soup-add-margin-top">
+		<div class="col s12 m4 l3">
+			<h5>登录</h5>
+	<form method="POST">
+	{% csrf_token %}
+	<span class="helper-text" data-error="wrong">{{ form.non_field_errors }}</span>
+	{% for field in form %}
+	<div class="row">
+		<div class="input-field col s12">
+		{{ field }}
+		{{ field.label_tag }}
+		<span class="helper-text" data-error="wrong">{{ field.errors }}</span>
+		</div>
+	</div>
+	{% endfor %}
+
+	<div class="row">
+		<div class="col s12">
+		<button type="submit" class="btn waves-effect waves-light">登录</button>
+		</div>
+	</div>
+	</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

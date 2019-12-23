@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}
+管理收到的评论 - Soup
+{% endblock %}
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col m3 l2 offset-l1 hide-on-med-and-down no-padding">
+			<ul class="soup-sidenav">
+				<li class="bold">
+					<a href="{% url 'panel_posts' %}" class="waves-effect">文章</a>
+				</li>
+				<li class="bold soup-active">
+					<a href="{% url 'panel_comments_rcvd' %}" class="waves-effect">评论</a>
+				</li>
+				<li class="bold">
+					<a href="{% url 'panel_users_followed_by_me' %}" class="waves-effect">关注</a>
+				</li>
+			</ul>
+		</div>
+		<div class="col s12 m12 l8 no-padding">
+			
+	<div class="soup-manage-main-wrapper">
+		<div class="row soup-row-add-margin-top">
+			<div class="col s12">
+				<div class="right-align soup-center-on-med-and-down">
+					<a href="{% url 'panel_comments_rcvd' %}" 
+						class="soup-breadcrumb soup-active">收到的评论</a>
+					<a href="{% url 'panel_comments_sent' %}" class="soup-breadcrumb">发出的评论</a>
+				</div>
+			</div>
+		</div>
+		<ul class="collection with-header soup-collection-rm-border">
+			<li class="collection-header"><h5>评论列表</h5></li>
+		{% for c in items %}
+			<li class="collection-item">
+				<a href="{{ c.creator.get_url }}">@{{ c.creator.username }}:</a>
+				<a href="{{ c.get_url }}">{{ c.content|safe|truncatechars:10 }}</a>
+				<div class="secondary-content soup-pos-relative">
+				<a class="btn-flat soup-btn-align" href="{% url 'post_view' c.post.id %}">
+						<i class="material-icons">reply</i></a>
+				<a class="btn-flat soup-btn-align" href="{% url 'post_comment_delete' c.id %}">
+						<i class="material-icons">delete</i></a>
+				</div>
+			</li>
+
+		{% endfor %}
+		</ul>
+	</div>
+	{% include 'include/_paginator.html' %}
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}
+管理我的关注 - Soup
+{% endblock %}
+
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col m3 l2 offset-l1 hide-on-med-and-down no-padding">
+			<ul class="soup-sidenav">
+				<li class="bold">
+					<a href="{% url 'panel_posts' %}" class="waves-effect">文章</a>
+				</li>
+				<li class="bold">
+					<a href="{% url 'panel_comments_rcvd' %}" class="waves-effect">评论</a>
+				</li>
+				<li class="bold soup-active">
+					<a href="{% url 'panel_users_followed_by_me' %}" class="waves-effect">关注</a>
+				</li>
+			</ul>
+		</div>
+		<div class="col s12 m12 l8 no-padding">
+			
+	<div class="soup-manage-main-wrapper">
+		<div class="row soup-row-add-margin-top">
+			<div class="col s12">
+				<div class="right-align soup-center-on-med-and-down">
+					<a href="{% url 'panel_users_followed_by_me' %}" 
+						class="soup-breadcrumb soup-active">我关注的人</a>
+					<a href="{% url 'panel_users_following_me' %}" 
+						class="soup-breadcrumb">关注我的人</a>
+				</div>
+			</div>
+		</div>
+		<ul class="collection with-header soup-collection-rm-border">
+			<li class="collection-header"><h5>关注列表</h5></li>
+		{% for u in items %}
+			<li class="collection-item avatar">
+				<img src="{{ u.gravatar }}" alt="{{ u.username }}" class="circle" />
+				<a href="{{ u.get_url}}"><span class="title">@{{ u.username }}</span></a>
+				<p>You followed @{{ u.username }} since ...</p>
+				<div class="secondary-content soup-pos-relative">
+				<a class="btn soup-btn-align grey" href="javascript:void(0);" title="取消关注"
+						data-user="{{ u.username }}" onclick="unfollow(event)">
+						<i class="material-icons">remove</i></a>
+				</div>
+			</li>
+
+		{% endfor %}
+		</ul>
+	</div>
+	{% include 'include/_paginator.html' %}
+		</div>
+	</div>
+</div>
+{% endblock %}

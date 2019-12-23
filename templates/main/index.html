@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}
+欢迎! - Soup
+{% endblock %}
+
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col s12 m10 offset-m1 l10 offset-l1"> 
+			<h4>{{ user.username }}, 好久不见!</h4>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col s12 m10 offset-m1 l10 offset-l1">
+			<a href="{% url 'index' %}" class="soup-breadcrumb soup-active">关注动态</a>
+			<a href="{% url 'index' %}?t=all" class="soup-breadcrumb">最新发布</a>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col s12 m10 offset-m1 l10 offset-l1"> 
+			<div class="soup-set-min-height-for-paginator">
+				<ul class="collection with-header soup-collection-rm-border">
+					<li class="collection-header"><h5>关注动态</h5></li>
+					{% for p in items %}
+					<li class="collection-item">
+						<span class="title">
+							<a href="{{ p.creator.get_url }}">@{{ p.creator.username }}</a> {{ p.published_at|date:"Y-m-d H:i"}} 发布了 
+							<a href="{{ p.get_url }}">{{ p.get_title }}</a>
+						</span>	
+						<p>{{ p.get_intro|truncatechars:100 }}</p>
+					</li>
+					{% empty %}
+					<p>你还没有关注过任何人, 去看看大家都发布了些什么吧<a href="?t=all"> 查看 </a></p>
+					{% endfor %}
+				</ul>
+			</div>
+			{% include 'include/_paginator.html' %}
+		</div>
+	</div>
+</div>
+{% endblock %}

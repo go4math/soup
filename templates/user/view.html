@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}
+{{ display_user.username }}的主页 - Soup
+{% endblock %}
+
+{% block body %}
+<div class="container">
+<div class="row soup-add-margin-top">
+	<div class="col s12 m10 offset-m1 l8">
+		<div class="soup-set-min-height-for-paginator">
+		<h3>{{ display_user.username }}</h3>
+
+		{% for p in items %}
+			<div class="card">
+				<div class="card-content">
+					<span class="card-title"><a href="{% url 'post_view' p.id %}">{{ p.get_title }}</a></span>
+					<p>{{ p.get_intro|truncatechars:150 }}...</p>
+				</div>
+				<div class="card-action">
+					{# <a href="{% url 'post_view' p.id %}">查看文章</a> #}
+					<a href="{% url 'post_view_comments' p.id %}">评论详情({{ p.comment_set.count }})</a>
+				</div>
+			</div>
+		{% empty %}
+			<p>这家伙太懒了, 什么也没写过...</p>
+		{% endfor %}
+		</div>
+	{% include 'include/_paginator.html' %}
+
+	</div>
+
+	{# add user info panel #}
+	<div class="col l4 hide-on-med-and-down">
+		{% include 'include/_user.html' %}
+	</div>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,69 @@
+<div class="card-panel z-depth-0">
+	<div class="row valign-wrapper">
+		<div class="col s4">
+			<img src="{{ display_user.gravatar100 }}" class="responsive-img">
+		</div>
+		<div class="col s8">
+			{% if display_user.name %}
+			<h6>{{ display_user.name }}</h6>
+			{% else %}
+			<h6>{{ display_user.username }}</h6>
+			{% endif %}
+			<div class="soup-align">
+			{% if display_user.gender == '1' %}
+				<div><i class="material-icons" style="vertical-align:text-bottom;
+				font-size:1.2rem;color:blue">person</i></div>
+				<div>{{ display_user.location }}</div>
+			{% elif display_user.gender == '2' %}
+				<div><i class="material-icons" style="vertical-align:text-bottom;
+				font-size:1.2rem;color:pink">person</i></div>
+				<div>{{ display_user.location }}</div>
+			{% else %}
+				<div><i class="material-icons" style="vertical-align:text-bottom;
+				font-size:1.2rem;">person</i></div>
+				<div>{{ display_user.location }}</div>
+			{% endif %}
+			</div>
+			{% if display_user.age %}
+				{% if display_user.birthmonth is True %}
+			<div class="soup-align">
+				<div><i class="material-icons" style="vertical-align:text-bottom;
+				font-size:1.2rem;color:#ff5722">cake</i></div>
+				{% else %}
+			<div class="soup-align">
+				<div><i class="material-icons" style="vertical-align:text-bottom;
+				font-size:1.2rem">cake</i></div>
+				{% endif %}
+				<div>{{ display_user.age }}</div>
+			</div>
+			{% endif %}
+
+		</div>
+
+	</div>
+	<div class="row">
+		<p>{{ display_user.bio }}</p>
+	</div>
+	<div class="soup-card-action">
+
+		<a class="btn waves-effect waves-light" href="{{ display_user.get_url }}">
+				<i class="material-icons">home</i></a>
+		{% if display_user != user %}
+			{% if not display_user in user.follow.all %}
+		<a class="btn waves-effect waves-light" href="javascript:void(0);" onclick="follow(event)" 
+			data-user="{{ display_user.username }}"><i class="material-icons">add</i></a>
+			{% else %}
+		<a class="btn waves-effect waves-light grey" href="javascript:void(0);" onclick="unfollow(event)" 
+			data-user="{{ display_user.username }}"><i class="material-icons">add</i></a>
+			{% endif %}
+		{% endif %}
+		{% comment %}
+		<a class="btn waves-effect waves-light " href="#">
+				<i class="material-icons">email</i></a>
+		{% endcomment %}
+		{% if display_user == user %}
+			<a class="btn waves-effect waves-light" href="/profile">
+				<i class="material-icons">edit</i></a>
+		{% endif %}
+	</div>
+</div>

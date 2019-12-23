@@ -1,0 +1,22 @@
+
+{#		<div class="col s12 soup-comment">#}
+			<ul class="collection with-header">
+				<li class="collection-header"><h6>最新评论</h6></li>
+			{% for c in comments %}
+			<li class="collection-item soup-collection-item-rm-padding">
+				{# <img src="{{ c.creator.gravatar }}" class="circle"/> #}
+				<span><a href="{{ c.creator.get_url }}">@{{ c.creator.username }}</a> {{ c.created_at|date:"Y-m-d H:i" }}</span><br />
+				<span>{{ c.content|escape|truncatechars:30 }}</span>
+				{% comment %}
+				<a href="javascript:void(0);" onclick="reply_fill('{{ c.creator.username }}')" 
+				class="btn-floating halfway-fab btn-small"><i class="material-icons">reply</i></a>
+				{% endcomment %}
+			</li>
+			{% empty %}
+			<li class="collection-item soup-collection-item-rm-padding">
+				<span>还没有人留言.</span>
+			</li>
+			{% endfor %}
+			</ul>
+				{#		</div>#}
+

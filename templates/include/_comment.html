@@ -1,0 +1,16 @@
+
+<form method="POST" action="{% url 'post_comment_create' post.id %}">
+			{% csrf_token %}
+		<div class="row">
+			<div class="input-field col s10">
+					<i class="material-icons prefix">mode_edit</i>
+				<textarea class="materialize-textarea" placeholder="评论" name="comment" required></textarea>
+
+			</div>
+			<div class="input-field col s1 offset-s1">
+				<button type="submit" class="btn-small right">
+				<i class="material-icons">send</i></button>
+			
+			</div>
+		</div>
+		</form>

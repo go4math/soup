@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}
+{{ post.get_title }} - Soup
+{% endblock %}
+
+{% block body %}
+<div class="container">
+<div class="row">
+	<div class="col s12 m10 offset-m1 l8">
+		{#<div class="card-panel">#}
+			<div class="row">
+				{% include 'include/_post.html' %}
+			</div>
+			{#</div>#}
+
+		{# edit/delete button and comment area #}
+		{# place edit / delete button etc #}
+		<div class="row">
+			<div class="col s12">
+			{% if post.is_published and post.creator != user %}
+			<span><a href="{{ post.creator.get_url }}">@{{ post.creator }}</a> 发表于{{ post.published_at|date:'Y/m/d' }}</span>
+			<span class="right hide-on-large-only"><a href="{% url 'post_view_comments' post.id %}">查看评论详情({{ comment_count }})</a></span>
+			{% elif post.is_published and post.creator == user %}
+			<span>{{ post.creator }}发表于{{ post.published_at|date:'Y/m/d' }}</span>
+			<span class="right hide-on-large-only"><a href="{% url 'post_view_comments' post.id %}">查看评论详情({{ comment_count }})</a></span> / 
+			<span class="right"><a href="{% url 'post_delete' post.id %}">删除</a></span>
+			{% else %}
+			<span>你创建于{{ post.created_at|date:'Y/m/d' }}</span>
+			<span class="right"><a href="{% url 'post_edit' post.id %}">编辑</a> / 
+				<a href="{% url 'post_delete' post.id %}">删除</a></span>
+			{% endif %}
+		{% if post.is_published %}
+			{% include 'include/_comment.html' %}
+		{% endif %}
+			</div>
+
+
+
+		</div>
+
+		{# comment area #}
+	    {# include 'post/_comment.html' #}	
+
+
+	</div>
+
+	{# add user info panel #}
+	<div class="col l4 hide-on-med-and-down">
+		{% include 'include/_user.html' %}
+	    {% include 'include/_comment_list.html' %}	
+		<span class="right"><a href="{% url 'post_view_comments' post.id %}">查看评论详情({{ comment_count }})</a></span>
+	</div>
+</div>
+</div>
+{% endblock %}

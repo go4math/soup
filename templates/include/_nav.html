@@ -1,0 +1,48 @@
+
+	<ul id="nav-large-dropdown" class="dropdown-content">
+		<li><a href="{% url 'panel_posts' %}" class="center">管理内容</a></li>
+		<li><a href="{% url 'profile_edit' %}" class="center">编辑资料</a></li>
+		<li><a href="{% url 'logout' %}" class="center">登出</a></li>
+	</ul>
+	<ul id="nav-med-dropdown" class="dropdown-content">
+		{% if user.confirmed %}
+		<li><a href="{% url 'post_create' %}">
+				<i class="material-icons">edit</i>创建新菜谱</a></li>
+		{% endif %}
+		{% if user.is_authenticated %}
+		<li><a href="{% url 'user_view' user.username %}">
+				<i class="material-icons">home</i>我的主页</a></li>
+		<li><a href="{% url 'panel_posts' %}">
+				<i class="material-icons">settings</i>管理内容</a></li>
+		<li><a href="{% url 'profile_edit' %}">
+				<i class="material-icons">account_box</i>编辑资料</a></li>
+		<li><a href="{% url 'logout' %}"><i class="material-icons">exit_to_app</i>登出</a></li>
+		{% else %}
+		<li><a href="{% url 'login' %}">登录</a></li>
+		<li><a href="{% url 'register' %}">注册</a></li>
+		{% endif %}
+	</ul>
+
+	<nav class="z-depth-0">
+		<div class="nav-wrapper container">
+			<a href="{% url 'index' %}" class="brand-logo">Soup</a>
+			<a href="#" class="dropdown-trigger hide-on-large-only" data-target="nav-med-dropdown">
+					<i class="material-icons">menu</i></a>
+			<ul class="right hide-on-med-and-down">
+				{% if user.is_authenticated %}
+				<li><a href="{% url 'post_create' %}" title="创建新菜谱">
+						<i class="material-icons" style="font-size:40px">create</i>
+					</a></li>
+					<li><a href="{% url 'user_view' user.username %}" title="我的主页"><i class="material-icons" style="font-size:40px">home</i></a></li>
+				<li><a class="dropdown-trigger" href="#!" data-target="nav-large-dropdown">
+					<div class="soup-thumbnail-wrapper">
+						<img src="{{ user.gravatar }}" alt="{{ user.username }}">
+						<i class="material-icons right">arrow_drop_down</i>
+					</div></a></li>
+				{% else %}
+				<li><a href="{% url 'login' %}">登录</a></li>
+				<li><a href="{% url 'register' %}">注册</a></li>
+				{% endif %}
+			</ul>
+		</div>
+	</nav>

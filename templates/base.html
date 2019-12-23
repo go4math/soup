@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% include 'include/_ui_src.html' %}
+	<title>{% block title %}Base Title{% endblock title %}</title>
+</head>
+<body>
+	{% include 'include/_nav.html' %}
+
+	{% include 'include/_toast_messages.html' %}
+	{% block body %}
+	{% endblock body %}
+
+	{% include 'include/_footer.html' %}
+	{% include 'include/_ui_init.html' %}
+	
+	<script type="text/babel">{% block babel %}{% endblock babel %}</script>
+</body>
+</html>
+

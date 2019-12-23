@@ -1,0 +1,31 @@
+<div>
+		<h4 class="center">{{ content.title }}</h4>
+		<div class="divider"></div>
+		<p>{{ content.intro }}</p>
+	
+		<div class="section">
+		<h5>材料</h5>
+			<table class="striped centered">
+				<thead><tr><th>材料名</th><th>数量</th></tr></thead>
+				<tbody>
+					{% for i in content.items %}
+					<tr>
+						<td>{{ i.item }}</td>
+						<td>{{ i.quantity }}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		<div class="section">
+		<h5>步骤</h5>
+		<ol>{% for s in content.steps %}
+			<li><p>{{ s }}</p></li>
+		{% endfor %}</ol>
+		</div>
+		<div class="section">
+		<h6>小贴士</h6>
+		<p>{{ content.fyi }}</p>
+		</div>
+		<div class="divider"></div>
+</div>

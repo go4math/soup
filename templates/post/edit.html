@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}
+编辑菜谱 - Soup
+{% endblock %}
+
+{% block body %}
+<div class="container">
+<div class="row">
+	<div class="col l6 offset-l2 m9 offset-m1 s12">
+	<h4>编辑菜谱</h4>
+<form method="POST">
+	{% csrf_token %}
+	{% include 'include/_edit.html' %}
+</form>
+	</div>
+	</div>
+</div>
+{% endblock %}
+
+
+{% block babel %}
+var items = {{ post.items|safe }};
+var steps = {{ post.steps|safe }};
+ReactDOM.render(<Itemlist content={items} />, document.getElementById("items"));
+ReactDOM.render(<Steplist content={steps} />, document.getElementById("steps"));
+
+{% endblock %}

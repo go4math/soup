@@ -1,0 +1,37 @@
+
+	<div class="row">
+		<div class="input-field col s12">
+			<input type="text" name="post-title" placeholder="标题" 
+				value="{{ post.title }}" requried />
+		</div>
+	</div>
+	<div class="row">
+		<div class="input-field col s12">
+		<textarea class="materialize-textarea" name="post-intro" 
+				placeholder="请输入描述" requried>{{ post.intro }}</textarea>
+		</div>
+	</div>
+	<div>
+		<h4>材料</h4>
+		<div id='items'></div>
+	</div>
+	<div>
+		<h4>步骤</h4>
+		<div id='steps'></div>
+	</div>
+	<div>
+		<h4>小贴士</h4>
+		<div class="row">
+			<div class="input-field col s12">
+			<textarea class="materialize-textarea" name="post-fyi" 
+				placeholder="注意事项" requried>{{ post.fyi }}</textarea>
+			</div>
+		</div>
+	</div>
+	<button class="waves-effect waves-light btn tooltipped" data-tooltip="发布" 
+		type="submit" name="do" value="pub">
+		<i class="material-icons">send</i></button>
+	<button class="waves-effect waves-light btn tooltipped" data-tooltip="仅保存" type="submit" name="do" value="sav">
+		<i class="material-icons">save</i></button>
+	<button class="waves-effect waves-light btn tooltipped" data-tooltip="删除" type="submit" name="do" value="del">
+		<i class="material-icons">delete</i></button>

@@ -1,0 +1,5 @@
+<script>
+{% for m in messages%}
+	M.toast({ html: "{{ m|safe }}" });
+{% endfor %}
+</script>

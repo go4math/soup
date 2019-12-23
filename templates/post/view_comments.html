@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}
+{{ post.title }}评论详情 - Soup
+{% endblock %}
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col m3 l2 offset-l1 hide-on-med-and-down no-padding">
+			<ul class="soup-sidenav">
+				<li class="bold soup-active">
+					<a href="{% url 'post_view' post.id %}" class="waves-effect">返回文章</a>
+				</li>
+			</ul>
+		</div>
+		<div class="col s12 m12 l8 no-padding">
+			
+	<div class="soup-manage-main-wrapper">
+		<ul class="collection with-header soup-collection-rm-border">
+			<li class="collection-header"><h5>评论列表</h5></li>
+		{% for c in items %}
+			<li class="collection-item">
+				<span class=title>
+					<a href="{{ c.creator.get_url}}">@{{ c.creator.username }}</a> 
+					{{ c.created_at|date:"Y-m-d H:i" }}
+				</span>
+				<p>{{ c.content|escape }}</p>
+			</li>
+		{% empty %}
+			<li class="collection-item">
+				<span>还没有人留言.</span>
+			</li>
+		{% endfor %}
+		</ul>
+	</div>
+	{% include 'include/_paginator.html' %}
+		</div>
+	</div>
+</div>
+{% endblock %}
